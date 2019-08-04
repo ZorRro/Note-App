@@ -1,5 +1,6 @@
 var express = require("express");
 var cors = require("cors");
+var path = require('path')
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
@@ -12,6 +13,7 @@ const PORT = (process.env.PORT || CONFIG.APP.PORT);
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const mongo_db = mongoose
     .connect(
@@ -25,12 +27,20 @@ const mongo_db = mongoose
         console.log("Error :: " + err);
     });
 
+
+
 app.use('/auth', AuthRouter)
 
 
 app.use("/", (req, res) => {
     res.send("Node Server is up");
 });
+
+app.use("*", (req, res) => {
+    res.sendFile(express.static(path.join(__dirname, 'public/index.html')));
+});
+
+
 
 app.listen(PORT, (req, res) => {
     console.log("server is listening on port " + PORT);
