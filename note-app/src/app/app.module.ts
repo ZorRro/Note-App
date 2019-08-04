@@ -8,6 +8,7 @@ import { AppLoginComponent } from './auth/app-login.component';
 import { AppSignupComponent } from './auth/app-signup.component';
 import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 
 
 
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     AppLoginComponent,
-    AppSignupComponent
+    AppSignupComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,

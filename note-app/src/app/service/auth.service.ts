@@ -9,20 +9,39 @@ import { User } from '../model/user.model';
 export class AuthService {
   private requestUri = 'http://localhost:3090/auth/login';
   private isLoggedIn = false;
+  private userId: string;
   constructor(private httpClient: HttpClient) {
 
   }
 
-  doLogin(userData) {
-    return this.httpClient.post<User[]>(this.requestUri, userData);
+  public doLogin(userData) {
+    return this.httpClient.post(this.requestUri, userData, { observe: 'response' });
   }
 
-  getIsLoggedIn() {
+  public doLogout() {
+    if ( localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+      this.updateUserStatus(this.userId);
+    }
+    return true;
+  }
+  public getLoginState() {
     return this.isLoggedIn;
   }
 
-  setIsLoggedIn(state: boolean) {
+  private setLoginState(state: boolean) {
     this.isLoggedIn = state;
+  }
+
+
+  updateUserStatus(userId: string) {
+    if (localStorage.getItem('token')) {
+      this.setLoginState(true);
+      this.userId = userId;
+    } else {
+      this.setLoginState(false);
+      this.userId = '';
+    }
   }
 
 }
