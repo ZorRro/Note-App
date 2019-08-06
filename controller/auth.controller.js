@@ -1,5 +1,6 @@
 const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
+const secret = process.env.SECRET
 
 function validateSignupUserData(userData) {
     if (
@@ -24,11 +25,9 @@ module.exports.loginController = (req, res) => {
             })
             .then(userResult => {
                 if (userResult) {
-                    console.log("User found");
+                    console.log("User Found");
                     const payload = userResult.id;
-                    const secret = require("../config/configuration").APP.SECRET;
                     const token = jwt.sign(payload, secret);
-                    console.log("Token generated : " + token);
                     const data = {
                         token: token,
                         id: payload
@@ -39,7 +38,6 @@ module.exports.loginController = (req, res) => {
                 }
             })
             .catch(err => {
-                console.log("User not found.");
                 res.status(500).json({ message: "Internal Server error." });
             });
     } else {

@@ -2,14 +2,14 @@ var express = require("express");
 var cors = require("cors");
 var path = require('path')
 var bodyParser = require("body-parser");
+require('dotenv').config()
 var mongoose = require("mongoose");
 
 
 const AuthRouter = require('./routes/auth.routes')
-const CONFIG = require('./config/configuration')
 
 const app = express();
-const PORT = (process.env.PORT || CONFIG.APP.PORT);
+const PORT = (process.env.PORT || "3090");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const mongo_db = mongoose
     .connect(
-        `${CONFIG.MONGO.MONGO_URI}/${CONFIG.MONGO.DB}?retryWrites=true&w=majority`, { useNewUrlParser: true }
+        process.env.MONGO_URI, { useNewUrlParser: true }
     )
     .then(result => {
         console.log("connected to mongoDB.");
@@ -28,20 +28,20 @@ const mongo_db = mongoose
     });
 
 
-
 app.use('/auth', AuthRouter)
-
-
 app.use("/", (req, res) => {
     res.send("Node Server is up");
 });
-
 app.use("*", (req, res) => {
     res.sendFile(express.static(path.join(__dirname, 'public/index.html')));
 });
 
 
-
 app.listen(PORT, (req, res) => {
     console.log("server is listening on port " + PORT);
+    console.log(
+        process.env.SECRET,
+        process.env.MONGO_URI,
+        process.env.DB
+    )
 });
