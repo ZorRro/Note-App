@@ -31,11 +31,8 @@ export class AppLoginComponent {
           }
         },
         err => {
-          this.loginMessage = 'Login Failed. ';
+          this.loginMessage = err.error.message || 'Login Failed. ';
           console.error(err);
-          if (err.error.message) {
-            this.loginMessage += err.error.message;
-          }
         }
       );
   }

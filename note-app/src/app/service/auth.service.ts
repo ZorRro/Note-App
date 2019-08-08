@@ -7,15 +7,22 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class AuthService {
-  private requestUri = environment.baseDomain + 'auth/login';
+  private loginUri = environment.baseDomain + 'auth/login';
+  private singupUri = environment.baseDomain + 'auth/signup';
   private isLoggedIn = false;
   private userId: string;
   constructor(private httpClient: HttpClient) {
 
   }
 
+  public doSignup(userData) {
+    return this.httpClient.post<any>(this.singupUri, userData,
+      { observe: 'response' }) ;
+}
+
+
   public doLogin(userData) {
-    return this.httpClient.post(this.requestUri, userData, { observe: 'response' });
+    return this.httpClient.post(this.loginUri, userData, { observe: 'response' });
   }
 
   public doLogout() {
@@ -25,6 +32,7 @@ export class AuthService {
     }
     return true;
   }
+
   public getLoginState() {
     return this.isLoggedIn;
   }

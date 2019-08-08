@@ -1,8 +1,8 @@
 var express = require("express");
+require('dotenv').config()
 var cors = require("cors");
 var path = require('path')
 var bodyParser = require("body-parser");
-require('dotenv').config()
 var mongoose = require("mongoose");
 
 
@@ -29,9 +29,8 @@ const mongo_db = mongoose
 
 
 app.use('/auth', AuthRouter)
-app.use("/", (req, res) => {
-    res.send("Node Server is up");
-});
+
+
 app.use("*", (req, res) => {
     res.sendFile(express.static(path.join(__dirname, 'public/index.html')));
 });
@@ -39,9 +38,9 @@ app.use("*", (req, res) => {
 
 app.listen(PORT, (req, res) => {
     console.log("server is listening on port " + PORT);
-    console.log(
-        process.env.SECRET,
-        process.env.MONGO_URI,
-        process.env.DB
-    )
+    // console.log(
+    //     process.env.SECRET,
+    //     process.env.MONGO_URI,
+    //     process.env.DB
+    // )
 });
