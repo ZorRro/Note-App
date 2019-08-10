@@ -1,9 +1,9 @@
-var express = require("express");
-require("dotenv").config();
-var cors = require("cors");
-var path = require("path");
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+var express = require('express');
+require('dotenv').config();
+var cors = require('cors');
+var path = require('path');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 const AuthRouter = require('./routes/auth.routes');
 const UserRouter = require('./routes/user.route');
@@ -28,9 +28,10 @@ const mongo_db = mongoose
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
 
-
 app.use("*", (req, res) => {
-    res.sendFile(express.static(path.join(__dirname, "public/index.html")));
+    const indexFile = path.join(__dirname, 'public/index.html');
+    console.log(`Serving index file : ${indexFile}`)
+    res.sendFile(express.static(indexFile));
 });
 
 app.listen(PORT, (req, res) => {

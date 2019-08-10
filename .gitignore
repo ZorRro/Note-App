@@ -3,6 +3,8 @@
 # Avaoid committing secrets
 .env
 
+#temporary test file
+temp.js
 
 # compiled output
 /dist
