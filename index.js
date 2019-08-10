@@ -1,24 +1,22 @@
 var express = require("express");
-require('dotenv').config()
+require("dotenv").config();
 var cors = require("cors");
-var path = require('path')
+var path = require("path");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
-
-const AuthRouter = require('./routes/auth.routes')
+const AuthRouter = require('./routes/auth.routes');
+const UserRouter = require('./routes/user.route');
 
 const app = express();
-const PORT = (process.env.PORT || "3090");
+const PORT = process.env.PORT || "3090";
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 const mongo_db = mongoose
-    .connect(
-        process.env.MONGO_URI, { useNewUrlParser: true }
-    )
+    .connect(process.env.MONGO_URI, { useNewUrlParser: true })
     .then(result => {
         console.log("connected to mongoDB.");
     })
@@ -27,14 +25,13 @@ const mongo_db = mongoose
         console.log("Error :: " + err);
     });
 
-
-app.use('/auth', AuthRouter)
+app.use("/auth", AuthRouter);
+app.use("/user", UserRouter);
 
 
 app.use("*", (req, res) => {
-    res.sendFile(express.static(path.join(__dirname, 'public/index.html')));
+    res.sendFile(express.static(path.join(__dirname, "public/index.html")));
 });
-
 
 app.listen(PORT, (req, res) => {
     console.log("server is listening on port " + PORT);
