@@ -16,13 +16,6 @@
                 <li class="nav-item">
                     <a class="nav-link">Dashboard</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item">Action 1</a>
-                        <a class="dropdown-item">Action 2</a>
-                    </div>
-                </li>
             </ul>
             <div class="button-group">
                 <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/signup']">
@@ -31,7 +24,22 @@
                 <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/login']">
                     <button class="btn btn-outline-success mr-2">Login</button>
                 </a>
-                <button *ngIf="authService.getLoginState()" (click)="handleLogout()" class="btn btn-outline-danger mr-2">Logout</button>
+                <div *ngIf="authService.getLoginState()">
+                    <ul class="navbar-nav mr-2 mt-2 mt-lg-0">
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle btn btn-outline-light mr-3 text-primary" id="dropdownId" data-toggle="dropdown">
+                              {{ user.name | titlecase}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item">Profile</a>
+                                <a class="dropdown-item">Action 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <button (click)="handleLogout()" class="btn btn-outline-danger mr-2">Logout</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

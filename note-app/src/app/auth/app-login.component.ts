@@ -20,16 +20,15 @@ export class AppLoginComponent {
     console.log(loginUser);
 
     this.authService.doLogin(loginUser)
-      .subscribe( response => {
-          if (response.status === 200 ) {
-            console.log(response.body);
-            const userToken = response.body['token'];
-            const userId = response.body['id'];
-            localStorage.setItem('token', userToken);
-            this.authService.updateUserStatus(userId);
-            this.router.navigate(['user', userId]);
-          }
-        },
+      .subscribe( (user: User) => {
+          console.log(user);
+          this.authService.setUser(user);
+          const userToken = user.token;
+          const userId = user.id;
+          localStorage.setItem("token", userToken);
+          this.authService.updateUserStatus(userId);
+          this.router.navigate(["user", userId]);
+      },
         err => {
           this.loginMessage = err.error.message || 'Login Failed. ';
           console.error(err);

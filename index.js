@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 const AuthRouter = require('./routes/auth.routes');
-const UserRouter = require('./routes/user.route');
+const UserRouter = require('./routes/user.routes');
 
 const app = express();
 const PORT = process.env.PORT || "3090";
@@ -25,11 +25,11 @@ const mongo_db = mongoose
         console.log("Error :: " + err);
     });
 
-app.use("/auth", AuthRouter);
-app.use("/user", UserRouter);
+app.use("/serverAuth", AuthRouter);
+app.use("/serverUser", UserRouter);
 
 app.use("*", (req, res) => {
-    const indexFile = path.join(__dirname, 'public/index.html');
+    const indexFile = path.join(__dirname, 'public', 'index.html');
     console.log(`Serving index file : ${indexFile}`)
     res.sendFile(express.static(indexFile));
 });

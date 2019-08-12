@@ -27,7 +27,10 @@ module.exports.comparePasswords = function(requestPassword, user) {
                 const token = jwt.sign(payload, secret);
                 const data = {
                     token: token,
-                    id: payload
+                    id: payload,
+                    name: user.name,
+                    notes: user.notes,
+                    email: user.email
                 };
                 // this data will be sent in response
                 return data;

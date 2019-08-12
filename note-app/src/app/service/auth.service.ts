@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { environment } from 'src/environments/environment';
@@ -7,12 +7,20 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class AuthService {
-  private loginUri = environment.baseDomain + 'auth/login';
-  private singupUri = environment.baseDomain + 'auth/signup';
+  private loginUri = environment.baseDomain + 'serverAuth/login';
+  private singupUri = environment.baseDomain + 'serverAuth/signup';
   private isLoggedIn = false;
-  private userId: string;
-  constructor(private httpClient: HttpClient) {
+  private _user: User = null;
+  @Output() updateEvent: EventEmitter<User> = new EventEmitter();
 
+  constructor(private httpClient: HttpClient) { }
+
+  setUser(user: User) {
+    this._user = user;
+  }
+
+  getUser() {
+    return this._user;
   }
 
   public doSignup(userData) {
@@ -22,13 +30,13 @@ export class AuthService {
 
 
   public doLogin(userData) {
-    return this.httpClient.post(this.loginUri, userData, { observe: 'response' });
+    return this.httpClient.post<User>(this.loginUri, userData);
   }
 
   public doLogout() {
     if ( localStorage.getItem('token')) {
       localStorage.removeItem('token');
-      this.updateUserStatus(this.userId);
+      this.updateUserStatus(this._user.id);
     }
     return true;
   }
@@ -37,19 +45,15 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
-  private setLoginState(state: boolean) {
-    this.isLoggedIn = state;
-  }
-
-
   updateUserStatus(userId: string) {
     if (localStorage.getItem('token')) {
-      this.setLoginState(true);
-      this.userId = userId;
+      this.isLoggedIn = true;
+      this._user.id = userId;
     } else {
-      this.setLoginState(false);
-      this.userId = '';
+      this.isLoggedIn = false;
+      this._user = null;
     }
+    this.updateEvent.emit(this._user);
   }
 
 }
