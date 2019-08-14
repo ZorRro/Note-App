@@ -1,3 +1,15 @@
-<p>
-  user-dashboard-component works!
-</p>
+<section id="user-notes">
+  <div class="container w-70">
+    <div class="note-container mt-10 mx-auto p-5">
+      <ul
+        class="list-group-horizontal d-flex justify-content-around"
+        style="list-style-type: none; flex-wrap: wrap; padding-left: 0"
+      >
+        <li *ngFor="let note of notes">
+          <app-note [note]="note"></app-note>
+        </li>
+      </ul>
+      <!-- <app-note></app-note> -->
+    </div>
+  </div>
+</section>

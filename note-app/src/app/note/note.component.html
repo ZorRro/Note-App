@@ -1,0 +1,15 @@
+<div class="card text-center m-5">
+  <div class="card-header">
+    <h5>{{ note.title }}</h5>
+    -<span class="text-secondary font-italic text-right">
+      {{ note.createdOn | date }}
+    </span>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ note.content }}</p>
+    <a href="#" class="btn btn-primary"> View </a>
+  </div>
+  <div class="card-footer text-muted">
+    {{ note.lastModified | date }}
+  </div>
+</div>
