@@ -20,5 +20,9 @@ export class AppComponent implements OnInit {
     this.authService.doLogout();
     this.router.navigate(["/"]);
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.updateEvent.subscribe(user => {
+      this.user = user;
+    });
+  }
 }
