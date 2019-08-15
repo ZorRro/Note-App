@@ -7,6 +7,7 @@ import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.com
 import { AuthGuard } from "guards/auth.guard";
 import { UserGuard } from "guards/user.guard";
 import { UserDataResolverService } from "./service/user-data-resolver.service";
+import { NoteViewComponent } from "./user/note-view/note-view.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: "user/note_view/:noteId",
+    component: NoteViewComponent,
+    canActivate: [UserGuard]
+  },
+  {
     path: "user/:id",
     component: UserDashboardComponent,
     resolve: {
@@ -30,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

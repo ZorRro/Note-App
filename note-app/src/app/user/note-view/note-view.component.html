@@ -1,0 +1,28 @@
+<div class="card w-75 my-5 mx-auto">
+  <div class="card card-header text-center">
+    <h4>{{ note.title | titlecase }}</h4>
+    <small>
+      <span class="text-dark font-italic"
+        >Created: {{ note.createdOn | date }}</span
+      >
+    </small>
+  </div>
+  <div class="card-body">
+    <div class="card-text lead">
+      <p>
+        {{ note.content }}
+      </p>
+      <small>
+        <span class="text-secondary font-italic float-right"
+          >Modified: {{ note.lastModified | date }}</span
+        ></small
+      >
+    </div>
+  </div>
+  <div class="card card-footer">
+    <div class="btn-group">
+      <button class="btn-md btn-warning mr-2 rounded-sm">Edit</button>
+      <button class="btn-md btn-danger mr-2 rounded-sm">Remove</button>
+    </div>
+  </div>
+</div>

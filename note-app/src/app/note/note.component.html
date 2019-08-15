@@ -1,13 +1,17 @@
-<div class="card text-center m-5">
+<div class="note-container card text-center m-5">
   <div class="card-header">
     <h5>{{ note.title }}</h5>
-    -<span class="text-secondary font-italic text-right">
-      {{ note.createdOn | date }}
+    <span
+      class="badge badge-pill badge-info font-italic card-text float-md-right"
+    >
+      -{{ note.createdOn | date }}
     </span>
   </div>
   <div class="card-body">
-    <p class="card-text">{{ note.content }}</p>
-    <a href="#" class="btn btn-primary"> View </a>
+    <p class="card-text">{{ note.content | shorten }}</p>
+    <button class="btn btn-primary" (click)="noteViewClickHandler()">
+      View
+    </button>
   </div>
   <div class="card-footer text-muted">
     {{ note.lastModified | date }}

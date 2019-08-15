@@ -15,6 +15,7 @@ import { AppSignupComponent } from "./auth/app-signup.component";
 import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.component";
 import { NoteComponent } from "./note/note.component";
 import { ShortenPipe } from './pipes/shorten.pipe';
+import { NoteViewComponent } from './user/note-view/note-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { ShortenPipe } from './pipes/shorten.pipe';
     AppSignupComponent,
     UserDashboardComponent,
     NoteComponent,
-    ShortenPipe
+    ShortenPipe,
+    NoteViewComponent
   ],
   imports: [
     BrowserModule,
