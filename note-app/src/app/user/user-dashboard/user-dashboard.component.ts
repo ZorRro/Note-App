@@ -10,7 +10,7 @@ import { UserService } from "src/app/service/user.service";
   styleUrls: ["./user-dashboard.component.css"]
 })
 export class UserDashboardComponent implements OnInit {
-  user: any = null;
+  user: User = null;
   notes: Note[];
   message: string;
   constructor(
@@ -24,6 +24,7 @@ export class UserDashboardComponent implements OnInit {
         this.user = data["user"].user;
         this.notes = this.user.notes;
         this.userService.setUserNotes(this.user.notes);
+        this.userService.setUser(this.user);
         // console.dir(`User data received : ${this.user}. Notes = ${this.notes}`);
       },
       err => {

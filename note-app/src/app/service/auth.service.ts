@@ -26,6 +26,10 @@ export class AuthService {
     return this._user;
   }
 
+  getUserId() {
+    return this._user.id;
+  }
+
   public doSignup(userData) {
     return this.httpClient.post<any>(this.singupUri, userData, {
       observe: "response"

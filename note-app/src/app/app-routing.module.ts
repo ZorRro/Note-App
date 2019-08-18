@@ -5,9 +5,11 @@ import { AppSignupComponent } from "./auth/app-signup.component";
 import { AppComponent } from "./app.component";
 import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.component";
 import { AuthGuard } from "guards/auth.guard";
-import { UserGuard } from "guards/user.guard";
+import { UserGuard, UserChildGuard } from "guards/user.guard";
 import { UserDataResolverService } from "./service/user-data-resolver.service";
 import { NoteViewComponent } from "./user/note-view/note-view.component";
+import { UserProfileComponent } from "./user/user-profile/user-profile.component";
+import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 
 const routes: Routes = [
   {
@@ -21,18 +23,49 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "user/note_view/:noteId",
-    component: NoteViewComponent,
-    canActivate: [UserGuard]
-  },
-  {
-    path: "user/:id",
-    component: UserDashboardComponent,
-    resolve: {
-      user: UserDataResolverService
-    },
-    canActivate: [UserGuard]
+    path: "user",
+    canActivateChild: [UserChildGuard],
+    children: [
+      {
+        path: "dashboard",
+        component: UserDashboardComponent,
+        resolve: {
+          user: UserDataResolverService
+        }
+      },
+      {
+        path: "note_view/:noteId",
+        component: NoteViewComponent
+      },
+      {
+        path: "profile",
+        component: UserProfileComponent
+      },
+      {
+        path: "profile/edit",
+        component: UserProfileEditComponent
+      }
+    ]
   }
+
+  // {
+  //   path: "user/note_view/:noteId",
+  //   component: NoteViewComponent,
+  //   canActivate: [UserGuard]
+  // },
+  // {
+  //   path: "user/profile",
+  //   component: UserProfileComponent,
+  //   canActivate: [UserGuard]
+  // },
+  // {
+  //   path: "user/:id",
+  //   component: UserDashboardComponent,
+  //   resolve: {
+  //     user: UserDataResolverService
+  //   },
+  //   canActivate: [UserGuard]
+  // }
 ];
 
 @NgModule({

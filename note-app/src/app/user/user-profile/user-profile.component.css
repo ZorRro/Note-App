@@ -1,0 +1,17 @@
+.user-detail {
+  margin: 0 auto;
+  padding-top: 2rem;
+  width: 50%;
+}
+
+.user-info {
+  float: right;
+  padding-right: 0px;
+  font-weight: 900;
+}
+
+.user-value {
+  float: left;
+  padding-left: 5px;
+  font-weight: 500;
+}

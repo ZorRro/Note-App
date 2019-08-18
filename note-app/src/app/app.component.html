@@ -1,49 +1,80 @@
 <section id="header">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand">
-            <h2>
-                Note
-            </h2>
-        </a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <h2>
+        Note
+      </h2>
+    </a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Dashboard</a>
-                </li>
-            </ul>
-            <div class="button-group">
-                <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/signup']">
-                    <button class="btn btn-primary mr-2">Signup</button>
-                </a>
-                <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/login']">
-                    <button class="btn btn-outline-success mr-2">Login</button>
-                </a>
-                <div *ngIf="authService.getLoginState()">
-                    <ul class="navbar-nav mr-2 mt-2 mt-lg-0">
-                        <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle btn btn-outline-light mr-3 text-primary" id="dropdownId" data-toggle="dropdown">
-                              {{ user.name | titlecase}}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item">Profile</a>
-                                <a class="dropdown-item">Action 2</a>
-                            </div>
-                        </li>
-                        <li>
-                            <button (click)="handleLogout()" class="btn btn-outline-danger mr-2">Logout</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['user/dashboard']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Dashboard</a
+          >
+        </li>
+      </ul>
+      <div class="button-group" style="cursor: pointer">
+        <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/signup']">
+          <button class="btn btn-primary mr-2">Signup</button>
+        </a>
+        <a *ngIf="!authService.getLoginState()" [routerLink]="['auth/login']">
+          <button class="btn btn-outline-success mr-2">Login</button>
+        </a>
+        <div *ngIf="authService.getLoginState()">
+          <ul class="navbar-nav mr-2 mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <button
+                class="nav-link dropdown-toggle btn btn-outline-light mr-3 text-primary"
+                id="dropdownId"
+                data-toggle="dropdown"
+              >
+                {{ user.name | titlecase }}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownId">
+                <a class="dropdown-item" [routerLink]="['user/profile']"
+                  >Profile</a
+                >
+                <a class="dropdown-item">Action 2</a>
+                <a class="dropdown-item">Action 3</a>
+              </div>
+            </li>
+            <li>
+              <button
+                (click)="handleLogout()"
+                class="btn btn-outline-danger mr-2"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </section>
-
 
 <router-outlet></router-outlet>

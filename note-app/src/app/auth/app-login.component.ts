@@ -26,7 +26,7 @@ export class AppLoginComponent {
         const userId = user.id;
         localStorage.setItem("token", userToken);
         this.authService.updateUserStatus(userId);
-        this.router.navigate(["user", userId, { data: user }]);
+        this.router.navigate(["user/dashboard", { data: user }]);
       },
       err => {
         this.loginMessage = err.error.message || "Login Failed. ";

@@ -1,0 +1,87 @@
+<section id="user-profile-edit">
+  <div class="container">
+    <div class="card w-50 mx-auto" style="border: 0">
+      <h4 class="card-title text-center text-capitalize">your profile</h4>
+      <div class="form px-2">
+        <div class="form-group">
+          <label for="name" class="h5">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="{{ user.username }}"
+            disabled
+          />
+        </div>
+        <p class="card-text text-danger ">
+          <span style="color:pink"> &#42; </span>Username can't be changed.
+        </p>
+        <div class="form-group">
+          <label for="name" class="h5">Name</label>
+          <input
+            type="text"
+            [(ngModel)]="user.name"
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="{{ user.name }}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="h5">email</label>
+          <input
+            type="email"
+            [(ngModel)]="user.email"
+            class="form-control"
+            name="email"
+            id="email"
+            placeholder="{{ user.email }}"
+          />
+        </div>
+        <div class="button-group row justify-content-around">
+          <div class="col-md-4">
+            <button
+              type="button"
+              class="btn btn-primary btn-block"
+              (click)="updateUser()"
+            >
+              Update
+            </button>
+          </div>
+
+          <div class="col-md-4">
+            <button
+              type="button"
+              class="btn btn-warning btn-block"
+              (click)="cancelUpdate()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer" *ngIf="message">
+        <div
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{{ message }}</strong>
+        </div>
+
+        <script>
+          $(".alert").alert();
+        </script>
+      </div>
+    </div>
+  </div>
+</section>

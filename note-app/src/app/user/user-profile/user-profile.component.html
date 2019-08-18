@@ -1,0 +1,40 @@
+<section id="user-profile">
+  <div class="container">
+    <div class="user-detail">
+      <table>
+        <tr>
+          <td class="text-right pr-0">Name :</td>
+          <td class="text-left pl-5">{{ user.name }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-0">Username :</td>
+          <td class="text-left pl-5">{{ user.username }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-0">email :</td>
+          <td class="text-left pl-5">{{ user.email }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-0">Total Notes :</td>
+          <td class="text-left pl-5">{{ user.notes.length }}</td>
+        </tr>
+      </table>
+
+      <div class="row mx-auto">
+        <div class="col">
+          <button
+            class="btn btn-primary btn-block"
+            [routerLink]="['/user/profile/edit']"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="col">
+          <button (click)="deleteUser()" class="btn btn-danger btn-block">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

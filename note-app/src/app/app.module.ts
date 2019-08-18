@@ -16,6 +16,8 @@ import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.com
 import { NoteComponent } from "./note/note.component";
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { NoteViewComponent } from './user/note-view/note-view.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileEditComponent } from './user/user-profile-edit/user-profile-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import { NoteViewComponent } from './user/note-view/note-view.component';
     UserDashboardComponent,
     NoteComponent,
     ShortenPipe,
-    NoteViewComponent
+    NoteViewComponent,
+    UserProfileComponent,
+    UserProfileEditComponent
   ],
   imports: [
     BrowserModule,

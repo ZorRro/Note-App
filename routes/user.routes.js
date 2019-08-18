@@ -11,35 +11,41 @@ const UserRouter = express.Router();
 
 UserRouter.post("/update", authUtil.verifyToken, (req, res) => {
   const userId = req.body.userId;
+  const userUpdateDetails = req.body;
   User.findById(userId)
     .then(user => {
       console.log(`User Retrieved : ${user}`);
       if (user.id === userId) {
         // Legitimate User
-        if (user.username !== userUpdateDetails.username) {
+        if (
+          userUpdateDetails.username &&
+          user.username !== userUpdateDetails.username
+        ) {
           // User has requested to change username. Disallow.
-          res.json(400).json({ message: "Username cannot be changed." });
+          return res.json(400).json({ message: "Username cannot be changed." });
         }
-        const updatedUser = new User();
-        updatedUser.username = user.username;
-        updatedUser.password = userUpdateDetails.password || user.password;
-        updatedUser.email = userUpdateDetails.email || user.email;
-        updatedUser.name = userUpdateDetails.name || user.name;
-        return updatedUser;
+
+        // username, password, notes
+        // will remain unchanged.
+        // Only mutable properties of user are updated.
+        user.name = userUpdateDetails.name || user.name;
+        user.email = userUpdateDetails.email || user.email;
+        return user;
       } else {
-        res.status(404).json({ message: "User is not authenticated." });
+        return res.status(404).json({ message: "User is not authenticated." });
       }
     })
     .then(updatedUser => {
       console.log(`res : ${updatedUser}`);
       updatedUser.save().then(result => {
         console.log("User Updated");
-        res.status(200).json(result);
+        result.password = null;
+        return res.status(200).json(result);
       });
     })
     .catch(err => {
       console.error(err);
-      res.status(400).send({ message: "Unable to update user." });
+      return res.status(400).send({ message: "Unable to update user." });
     });
 });
 
