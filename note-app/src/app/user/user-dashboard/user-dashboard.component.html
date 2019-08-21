@@ -1,15 +1,39 @@
-<section id="user-notes">
-  <div class="container w-70">
-    <div class="mt-10 mx-auto p-5">
-      <ul
-        class="list-group-horizontal d-flex justify-content-around"
-        style="list-style-type: none; flex-wrap: wrap; padding-left: 0"
-      >
-        <li *ngFor="let note of notes">
+<section id="user-notes" class="container-fluid mt-5">
+  <div class="row mx-auto" style="max-width: 85%">
+    <div class="d-none d-md-inline col-md-3 mr-3">
+      <div class="form-group">
+        <label for="note_filter">Filter Notes</label>
+        <input
+          type="text"
+          name="note_filter"
+          id="note_filter"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col col-md-8">
+      <ul class="row list-unstyled">
+        <li *ngFor="let note of notes" class="col col-md-6">
           <app-note [note]="note"></app-note>
         </li>
+
+        <li class="col col-md-6">
+          <div class="note-container card text-center m-1">
+            <div class="card-header">
+              <h5>
+                <a [routerLink]="'/user/note/new-note'">
+                  <fa name="plus" class="small mr-1 text-dark"></fa> New Note
+                </a>
+              </h5>
+            </div>
+          </div>
+        </li>
       </ul>
-      <!-- <app-note></app-note> -->
     </div>
+    <!-- <app-note></app-note> -->
   </div>
 </section>
+
+<!--           class="list-group-horizontal d-flex justify-content-around"
+          style="list-style-type: none; flex-wrap: wrap; padding-left: 0"
+ -->

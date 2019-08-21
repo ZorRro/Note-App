@@ -3,6 +3,6 @@ export interface Note {
   title: string;
   author: string;
   content: string;
-  createdOn: string;
-  lastModified: string;
+  createdOn: Date;
+  lastModified: Date;
 }

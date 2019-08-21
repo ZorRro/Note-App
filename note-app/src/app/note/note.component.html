@@ -1,4 +1,4 @@
-<div class="note-container card text-center m-5">
+<div class="note-container card text-center m-1">
   <div class="card-header">
     <h5>{{ note.title }}</h5>
     <span
@@ -8,7 +8,7 @@
     </span>
   </div>
   <div class="card-body">
-    <p class="card-text">{{ note.content | shorten }}</p>
+    <p class="card-text">{{ note.content | stripHTML | shorten }}</p>
     <button class="btn btn-primary" (click)="noteViewClickHandler()">
       View
     </button>

@@ -8,10 +8,7 @@
     </small>
   </div>
   <div class="card-body">
-    <div class="card-text lead">
-      <p>
-        {{ note.content }}
-      </p>
+    <div class="card-text lead" [innerHTML]="note.content">
       <small>
         <span class="text-secondary font-italic float-right"
           >Modified: {{ note.lastModified | date }}</span
@@ -22,7 +19,9 @@
   <div class="card card-footer">
     <div class="btn-group">
       <button class="btn-md btn-warning mr-2 rounded-sm">Edit</button>
-      <button class="btn-md btn-danger mr-2 rounded-sm">Remove</button>
+      <button class="btn-md btn-danger mr-2 rounded-sm" (click)="deleteNote()">
+        Remove
+      </button>
     </div>
   </div>
 </div>

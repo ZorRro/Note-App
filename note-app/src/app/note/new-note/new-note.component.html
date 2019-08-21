@@ -1,0 +1,32 @@
+<section id="user-new-note" class="container-fluid mt-5">
+  <div class="row mx-auto" style="max-width: 85%">
+    <form #noteForm="ngForm" (ngSubmit)="onSubmit(noteForm)">
+      <div class="d-block col-md-4 mx-auto">
+        <div class="form-group">
+          <input
+            type="text"
+            ngModel
+            name="noteTitle"
+            id="noteTitle"
+            placeholder="Note Title"
+            class="form-control text-center text-capitalize text-dark display-3 font-weight-bold"
+          />
+        </div>
+      </div>
+      <div class="col pt-3">
+        <div class="form-group mx-auto p-3">
+          <quill-editor ngModel name="noteContent"> </quill-editor>
+        </div>
+      </div>
+      <div class="col col-md-2 float-right">
+        <button class="btn btn-danger btn-block">Cancel</button>
+      </div>
+      <div class="col col-md-2 float-right">
+        <button type="reset" class="btn btn-warning btn-block">Reset</button>
+      </div>
+      <div class="col col-md-2 float-right">
+        <button class="btn btn-primary btn-block">Submit</button>
+      </div>
+    </form>
+  </div>
+</section>

@@ -2,14 +2,14 @@
 const express = require("express");
 const User = require("../model/user.model");
 const Note = require("../model/note.model");
-const authUtil = require("../util/auth.util");
+const mongoose = require("mongoose");
 
 // Custom constants
 const UserRouter = express.Router();
 
 // Routes
 
-UserRouter.post("/update", authUtil.verifyToken, (req, res) => {
+UserRouter.post("/update", (req, res) => {
   const userId = req.body.userId;
   const userUpdateDetails = req.body;
   User.findById(userId)
@@ -49,7 +49,7 @@ UserRouter.post("/update", authUtil.verifyToken, (req, res) => {
     });
 });
 
-UserRouter.get("/delete", authUtil.verifyToken, (req, res) => {
+UserRouter.get("/delete", (req, res) => {
   const userId = req.body.userId;
   User.findByIdAndRemove(userId)
     .then(result => {
@@ -67,7 +67,7 @@ UserRouter.get("/delete", authUtil.verifyToken, (req, res) => {
     });
 });
 
-UserRouter.get("/:id", authUtil.verifyToken, (req, res) => {
+UserRouter.get("/:id", (req, res) => {
   const userId = req.params.id;
   User.findById(userId)
     .populate("note.id")
@@ -92,15 +92,14 @@ UserRouter.get("/:id", authUtil.verifyToken, (req, res) => {
     });
 });
 
-UserRouter.post("/notes/add", authUtil.verifyToken, (req, res) => {
-  const userId = req.body.userId;
+UserRouter.post("/notes/add", (req, res) => {
+  const userId = mongoose.Types.ObjectId.createFromHexString(req.body.userId);
   let tempUser = null,
     newNote = null;
   tempNoteSaveResult = null;
 
   User.findById(userId)
-    .populate("notes.id")
-    // .execPopulate()
+    .populate("notes", ["id"])
     .then(user => {
       if (!user) {
         res.status(404).json({ message: "User is not registered." });
@@ -117,7 +116,7 @@ UserRouter.post("/notes/add", authUtil.verifyToken, (req, res) => {
           .status(500)
           .json({ message: "Unable to save a new note at the moment." });
       }
-      tempUser.notes.push(newNote.id);
+      tempUser.addNote(noteSaveResult.id);
       tempNoteSaveResult = noteSaveResult;
       return tempUser.save();
     })
@@ -130,6 +129,66 @@ UserRouter.post("/notes/add", authUtil.verifyToken, (req, res) => {
     .catch(err => {
       console.error(`error occurred. ${err}`);
       res.status(500).json({ message: err });
+    });
+});
+
+UserRouter.delete("/notes/delete/:id", (req, res) => {
+  const userId = req.body.userId;
+  const noteId = req.params["id"];
+  User.findById(userId)
+    .populate("notes", ["id"])
+    .then(user => {
+      user.removeNote(noteId);
+      user
+        .save()
+        .then(user => {
+          console.log("After removing the note");
+          res.sendStatus(204);
+          Note.findByIdAndDelete(noteId)
+            .then(deleteResult => {
+              console.log("Successfully deleted note. Complete operation");
+            })
+            .catch(err => {
+              console.error("Unable to delete note from NOTES.");
+              return res.status(500);
+            });
+        })
+        .catch(err => {
+          console.error(err);
+          return res.status(500);
+        });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500);
+    });
+});
+
+UserRouter.post("/notes/update", (req, res) => {
+  // We are expecting the following info. in the req.body.note
+  // note : {
+  //  id: "string repr. of ObjectID",
+  //  content: "new content to store."
+  // }
+  const reqNote = req.body.note;
+  if (!(reqNote.id && reqNote.content)) {
+    console.log("reqNote doesn't contain required info.");
+    res.status(412).json({ message: "Request is not in proper format." });
+  }
+  Note.findById(reqNote.id)
+    .then(note => {
+      note.content = reqNote.content;
+      return note;
+    })
+    .then(updatedNote => {
+      updatedNote.save().then(result => {
+        res.status(200).json({ note: updatedNote });
+        console.log("Updated successfully.");
+      });
+    })
+    .catch(err => {
+      console.log("Update failed.");
+      res.status(500).json({ error: err });
     });
 });
 

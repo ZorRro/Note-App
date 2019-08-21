@@ -10,6 +10,7 @@ import { UserDataResolverService } from "./service/user-data-resolver.service";
 import { NoteViewComponent } from "./user/note-view/note-view.component";
 import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
+import { NewNoteComponent } from "./note/new-note/new-note.component";
 
 const routes: Routes = [
   {
@@ -44,28 +45,18 @@ const routes: Routes = [
       {
         path: "profile/edit",
         component: UserProfileEditComponent
+      },
+      {
+        path: "note",
+        children: [
+          {
+            path: "new-note",
+            component: NewNoteComponent
+          }
+        ]
       }
     ]
   }
-
-  // {
-  //   path: "user/note_view/:noteId",
-  //   component: NoteViewComponent,
-  //   canActivate: [UserGuard]
-  // },
-  // {
-  //   path: "user/profile",
-  //   component: UserProfileComponent,
-  //   canActivate: [UserGuard]
-  // },
-  // {
-  //   path: "user/:id",
-  //   component: UserDashboardComponent,
-  //   resolve: {
-  //     user: UserDataResolverService
-  //   },
-  //   canActivate: [UserGuard]
-  // }
 ];
 
 @NgModule({
