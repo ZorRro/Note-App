@@ -170,8 +170,8 @@ UserRouter.post("/notes/update", (req, res) => {
   //  id: "string repr. of ObjectID",
   //  content: "new content to store."
   // }
-  const reqNote = req.body.note;
-  if (!(reqNote.id && reqNote.content)) {
+  const reqNote = req.body;
+  if (!reqNote || !(reqNote.id || reqNote.content)) {
     console.log("reqNote doesn't contain required info.");
     res.status(412).json({ message: "Request is not in proper format." });
   }
@@ -182,7 +182,7 @@ UserRouter.post("/notes/update", (req, res) => {
     })
     .then(updatedNote => {
       updatedNote.save().then(result => {
-        res.status(200).json({ note: updatedNote });
+        res.status(200).json(updatedNote);
         console.log("Updated successfully.");
       });
     })

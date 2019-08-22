@@ -11,6 +11,7 @@ import { NoteViewComponent } from "./user/note-view/note-view.component";
 import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
+import { NoteEditComponent } from "./user/note-edit/note-edit.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: "note_view/:noteId",
         component: NoteViewComponent
+      },
+      {
+        path: "note_edit/:noteId",
+        component: NoteEditComponent
       },
       {
         path: "profile",

@@ -21,4 +21,8 @@ export class NoteService {
       observe: "response"
     });
   }
+
+  updateNote(note: { id: string; content: string }) {
+    return this.http.post(this._noteBaseApi + "update", note);
+  }
 }

@@ -23,6 +23,8 @@ import { UserProfileComponent } from "./user/user-profile/user-profile.component
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
 import { StripHTMLPipe } from './pipes/strip-html.pipe';
+import { KeepHtmlPipe } from './pipes/keep-html.pipe';
+import { NoteEditComponent } from './user/note-edit/note-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,9 @@ import { StripHTMLPipe } from './pipes/strip-html.pipe';
     UserProfileComponent,
     UserProfileEditComponent,
     NewNoteComponent,
-    StripHTMLPipe
+    StripHTMLPipe,
+    KeepHtmlPipe,
+    NoteEditComponent
   ],
   imports: [
     BrowserModule,

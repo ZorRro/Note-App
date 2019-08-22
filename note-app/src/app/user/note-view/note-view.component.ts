@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { UserService } from "src/app/service/user.service";
 import { NoteService } from "src/app/service/note.service";
 import { HttpResponse } from "@angular/common/http";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-note-view",
@@ -12,6 +13,9 @@ import { HttpResponse } from "@angular/common/http";
 })
 export class NoteViewComponent implements OnInit {
   note: Note;
+  isEditing: boolean = false;
+  noteContent: string;
+
   constructor(
     private userService: UserService,
     private noteService: NoteService,
@@ -41,5 +45,9 @@ export class NoteViewComponent implements OnInit {
         }
       );
     }
+  }
+
+  editNote() {
+    this.router.navigate(["/user/note_edit/", this.note["_id"]]);
   }
 }
