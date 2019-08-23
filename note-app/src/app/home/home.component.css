@@ -1,0 +1,60 @@
+.font-lato {
+  font-family: "Lato", sans-serif;
+  /* To be used for amazing headings */
+}
+
+.font-oswald {
+  font-family: "Oswald", sans-serif;
+  /* To be used for column headings */
+}
+
+.font-merriweather {
+  font-family: "Merriweather", serif;
+  /* To be used as footer headings/ sub-title headings */
+}
+
+.font-roboto-slab {
+  font-family: "Roboto Slab", serif;
+  /* base font for text */
+}
+
+#welcome {
+  background-color: #ffffff;
+}
+
+#features {
+  background-color: #fcfae7;
+}
+
+#view {
+  background-color: #c2dded;
+}
+
+#note-image {
+  background-image: url("https://images.pexels.com/photos/905873/pexels-photo-905873.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
+
+#connectme {
+  background-color: #ffffff;
+}
+
+#thanks {
+  background-color: #0079bf;
+  color: #ffffff;
+}
+
+#footer {
+  background-color: #0c0c0c;
+  color: #ffffff;
+}
+
+#left-footer {
+  border-right: #fcfae7 1px solid;
+}
+
+#right-footer {
+  border-left: #fcfae7 1px solid;
+}

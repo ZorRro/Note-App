@@ -48,6 +48,6 @@ export class NoteViewComponent implements OnInit {
   }
 
   editNote() {
-    this.router.navigate(["/user/note_edit/", this.note["_id"]]);
+    this.router.navigate(["/user/note/edit/", this.note["_id"]]);
   }
 }

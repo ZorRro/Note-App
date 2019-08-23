@@ -16,6 +16,6 @@ export class NoteComponent implements OnInit {
   }
 
   noteViewClickHandler() {
-    this.router.navigate(["user/note_view", this.note["_id"]]);
+    this.router.navigate(["user/note/view", this.note["_id"]]);
   }
 }

@@ -25,6 +25,8 @@ import { NewNoteComponent } from "./note/new-note/new-note.component";
 import { StripHTMLPipe } from './pipes/strip-html.pipe';
 import { KeepHtmlPipe } from './pipes/keep-html.pipe';
 import { NoteEditComponent } from './user/note-edit/note-edit.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { NoteEditComponent } from './user/note-edit/note-edit.component';
     NewNoteComponent,
     StripHTMLPipe,
     KeepHtmlPipe,
-    NoteEditComponent
+    NoteEditComponent,
+    HomeComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

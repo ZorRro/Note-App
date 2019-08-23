@@ -12,17 +12,27 @@ import { UserProfileComponent } from "./user/user-profile/user-profile.component
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
 import { NoteEditComponent } from "./user/note-edit/note-edit.component";
+import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
   {
-    path: "auth/login",
-    component: AppLoginComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: "auth/signup",
-    component: AppSignupComponent,
-    canActivate: [AuthGuard]
+    path: "auth",
+    children: [
+      {
+        path: "login",
+        component: AppLoginComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "signup",
+        component: AppSignupComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "**",
+        redirectTo: "login"
+      }
+    ]
   },
   {
     path: "user",
@@ -34,14 +44,6 @@ const routes: Routes = [
         resolve: {
           user: UserDataResolverService
         }
-      },
-      {
-        path: "note_view/:noteId",
-        component: NoteViewComponent
-      },
-      {
-        path: "note_edit/:noteId",
-        component: NoteEditComponent
       },
       {
         path: "profile",
@@ -57,10 +59,26 @@ const routes: Routes = [
           {
             path: "new-note",
             component: NewNoteComponent
+          },
+          {
+            path: "view/:noteId",
+            component: NoteViewComponent
+          },
+          {
+            path: "edit/:noteId",
+            component: NoteEditComponent
           }
         ]
+      },
+      {
+        path: "**",
+        redirectTo: "dashboard"
       }
     ]
+  },
+  {
+    path: "**",
+    component: HomeComponent
   }
 ];
 

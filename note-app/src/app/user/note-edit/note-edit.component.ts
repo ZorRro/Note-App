@@ -54,6 +54,6 @@ export class NoteEditComponent implements OnInit {
   }
 
   cancelEditing() {
-    this.router.navigate(["/user/note_view", this.note["_id"]]);
+    this.router.navigate(["/user/note/view", this.note["_id"]]);
   }
 }

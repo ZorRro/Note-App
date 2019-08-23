@@ -9,20 +9,7 @@ import { User } from "./model/user.model";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  constructor(public authService: AuthService, private router: Router) {}
-  title = "note-app";
-  user: User;
-  public isLoggedIn() {
-    this.authService.getLoginState();
-  }
+  constructor() {}
 
-  public handleLogout() {
-    this.authService.doLogout();
-    this.router.navigate(["/"]);
-  }
-  ngOnInit() {
-    this.authService.updateEvent.subscribe(user => {
-      this.user = user;
-    });
-  }
+  ngOnInit() {}
 }
