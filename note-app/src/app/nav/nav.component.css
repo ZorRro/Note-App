@@ -7,6 +7,6 @@ navbar-brand {
   font-weight: 900;
 }
 
-.nav-link {
+a.nav-link {
   font-size: 2rem;
 }

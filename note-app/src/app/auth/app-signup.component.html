@@ -1,4 +1,7 @@
-<section id="login">
+<!-- 
+    TDF
+    
+    <section id="login">
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <form class="col-md-5 mt-5" #signupForm="ngForm" (ngSubmit)="handleSignup(signupForm)">
@@ -38,9 +41,114 @@
 
 </section>
 
+-->
 
-<!--
+<section id="login">
+  <div class="container-fluid row">
+    <div class="col col-md-6 col-lg-4 mx-auto">
+      <form class="formGroup" [formGroup]="signupForm" (ngSubmit)="onSignup()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="John Doe"
+            [class.is-invalid]="
+              signupForm.get('name').touched && signupForm.get('name').invalid
+            "
+          />
+        </div>
 
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            formControlName="username"
+            type="text"
+            class="form-control"
+            name="username"
+            id="username"
+            placeholder="John"
+            [class.is-invalid]="
+              signupForm.get('username').touched &&
+              signupForm.get('username').invalid
+            "
+          />
+        </div>
 
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder=""
+            [class.is-invalid]="
+              signupForm.get('password').touched &&
+              signupForm.get('password').invalid
+            "
+          />
+        </div>
 
- -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            class="form-control"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder=""
+            [class.is-invalid]="
+              signupForm.get('confirmPassword').touched &&
+              signupForm.get('confirmPassword').invalid
+            "
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            formControlName="email"
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            placeholder="john@gmail.com"
+            [class.is-invalid]="
+              signupForm.get('email').touched && signupForm.get('email').invalid
+            "
+          />
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                formControlName="subscribe"
+                type="checkbox"
+                class="form-check-input"
+                name="subscribe"
+                id="subscribe"
+                value="checkedValue"
+              />
+              Subscribe
+            </label>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button
+            type="submit"
+            class="btn btn-primary mr-2"
+            [disabled]="signupForm.invalid"
+          >
+            Submit
+          </button>
+          <button type="reset" class="btn btn-warning mr-2">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

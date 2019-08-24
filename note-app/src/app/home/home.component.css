@@ -18,6 +18,10 @@
   /* base font for text */
 }
 
+.no-text-decoration {
+  text-decoration: none;
+}
+
 #welcome {
   background-color: #ffffff;
 }
