@@ -8,7 +8,7 @@
     </span>
   </div>
   <div class="card-body">
-    <p class="card-text">{{ note.content | stripHTML | shorten }}</p>
+    <p class="card-text" [innerHTML]="note.content | stripHTML | shorten"></p>
     <button class="btn btn-primary" (click)="noteViewClickHandler()">
       View
     </button>

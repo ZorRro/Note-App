@@ -10,7 +10,8 @@ import { AuthService } from "./service/auth.service";
 import { UserDataResolverService } from "./service/user-data-resolver.service";
 import { TokenInterceptorService } from "./service/token-interceptor.service";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
-import { QuillModule } from "ngx-quill";
+// import { QuillModule } from "ngx-quill";
+import { CKEditorModule } from "ckeditor4-angular";
 
 import { AppComponent } from "./app.component";
 import { AppLoginComponent } from "./auth/app-login.component";
@@ -18,15 +19,15 @@ import { AppSignupComponent } from "./auth/app-signup.component";
 import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.component";
 import { NoteComponent } from "./note/note.component";
 import { ShortenPipe } from "./pipes/shorten.pipe";
-import { NoteViewComponent } from "./user/note-view/note-view.component";
+import { NoteViewComponent } from "./note/note-view/note-view.component";
 import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
-import { StripHTMLPipe } from './pipes/strip-html.pipe';
-import { KeepHtmlPipe } from './pipes/keep-html.pipe';
-import { NoteEditComponent } from './user/note-edit/note-edit.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
+import { StripHTMLPipe } from "./pipes/strip-html.pipe";
+import { KeepHtmlPipe } from "./pipes/keep-html.pipe";
+import { NoteEditComponent } from "./note/note-edit/note-edit.component";
+import { HomeComponent } from "./home/home.component";
+import { NavComponent } from "./nav/nav.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
-    QuillModule.forRoot(),
+    // QuillModule.forRoot(),
+    CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,

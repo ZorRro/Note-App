@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { UserService } from "src/app/service/user.service";
 import { NoteService } from "src/app/service/note.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Note } from "src/app/model/note.model";
 import { NgForm } from "@angular/forms";
+import { stripHTML } from "src/app/common/util";
 
 @Component({
   selector: "app-note-edit",
@@ -13,6 +14,8 @@ import { NgForm } from "@angular/forms";
 export class NoteEditComponent implements OnInit {
   note: Note;
   noteContent: string;
+  validContent: boolean;
+
   constructor(
     private userService: UserService,
     private noteService: NoteService,
@@ -28,25 +31,36 @@ export class NoteEditComponent implements OnInit {
       this.noteContent = this.note.content;
     });
   }
+
   updateNote(updateForm: NgForm) {
-    const noteContent = updateForm.value.noteContent;
+    // const noteContent = updateForm.value.noteContent;
     const noteId = this.note["_id"];
     const note = {
       id: noteId,
-      content: noteContent
+      content: this.noteContent
     };
     this.noteService.updateNote(note).subscribe(
       (note: Note) => {
         if (note) {
           console.log("Note has been updated.");
           this.note = note;
+          this.noteService.pushNote(note);
+          this.cancelEditing();
         } else {
           console.log("Unexpected. Note was not found.");
         }
-        this.cancelEditing();
       },
       err => console.error
     );
+  }
+
+  onChange($event) {
+    let content = stripHTML($event);
+    if (content.length === 0) {
+      this.validContent = false;
+    } else {
+      this.validContent = true;
+    }
   }
 
   resetNoteContent() {

@@ -1,0 +1,56 @@
+<section id="user-new-note" class="container-fluid mt-5">
+  <div class="row">
+    <form
+      class="col col-md-8 mx-auto"
+      #noteForm="ngForm"
+      (ngSubmit)="updateNote(noteForm)"
+    >
+      <div class="d-block col-md-4 mx-auto">
+        <div
+          class="h4 display-4 text-capitalize font-weight-bold mb-0 font-roboto-slab text-center"
+        >
+          {{ note.title }}
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mx-auto pl-3 pr-3">
+          <ckeditor
+            [(data)]="noteContent"
+            name="noteContent"
+            (dataChange)="onChange($event)"
+          >
+          </ckeditor>
+        </div>
+        <!-- <div
+          *ngIf="noteContent.touched && noteContent.invalid"
+          class="float-left"
+        >
+          <small class="text-danger">A note should have some content.</small>
+        </div> -->
+      </div>
+      <div class="col col-md-2 float-right">
+        <button class="btn btn-danger btn-block" (click)="cancelEditing()">
+          Cancel
+        </button>
+      </div>
+      <div class="col col-md-2 float-right">
+        <button
+          type="button"
+          class="btn btn-warning btn-block"
+          (click)="resetNoteContent()"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="col col-md-2 float-right">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          [disabled]="!validContent"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

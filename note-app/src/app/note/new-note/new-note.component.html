@@ -1,9 +1,14 @@
 <section id="user-new-note" class="container-fluid mt-5">
-  <div class="row mx-auto" style="max-width: 85%">
-    <form #noteForm="ngForm" (ngSubmit)="onSubmit(noteForm)">
+  <div class="row">
+    <form
+      class="col col-md-8 mx-auto"
+      #noteForm="ngForm"
+      (ngSubmit)="onSubmit(noteForm)"
+    >
       <div class="d-block col-md-4 mx-auto">
-        <div class="form-group">
+        <div class="form-group mb-0">
           <input
+            required
             type="text"
             ngModel
             name="noteTitle"
@@ -13,19 +18,27 @@
           />
         </div>
       </div>
-      <div class="col pt-3">
+      <div class="col">
         <div class="form-group mx-auto p-3">
-          <quill-editor ngModel name="noteContent"> </quill-editor>
+          <ckeditor ngModel name="noteContent" (dataChange)="onChange($event)">
+          </ckeditor>
         </div>
       </div>
-      <div class="col col-md-2 float-right">
-        <button class="btn btn-danger btn-block">Cancel</button>
+      <div class="col col-sm-4 col-md-2 p-0 mr-1 float-right">
+        <button class="btn btn-danger btn-block" (click)="goToDashboard()">
+          Cancel
+        </button>
       </div>
-      <div class="col col-md-2 float-right">
+      <div class="col col-sm-4 col-md-2 p-0 mr-1 float-right">
         <button type="reset" class="btn btn-warning btn-block">Reset</button>
       </div>
-      <div class="col col-md-2 float-right">
-        <button class="btn btn-primary btn-block">Submit</button>
+      <div class="col col-sm-4 col-md-2 p-0 mr-1 float-right">
+        <button
+          class="btn btn-primary btn-block"
+          [disabled]="!validContent || noteForm.invalid"
+        >
+          Submit
+        </button>
       </div>
     </form>
   </div>

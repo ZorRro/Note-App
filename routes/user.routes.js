@@ -124,7 +124,7 @@ UserRouter.post("/notes/add", (req, res) => {
       if (!userSaveResult) {
         res.status(500).json({ message: "Internal Server Error." });
       }
-      res.status(200).json({ note: tempNoteSaveResult });
+      res.status(200).json(tempNoteSaveResult);
     })
     .catch(err => {
       console.error(`error occurred. ${err}`);

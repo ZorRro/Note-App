@@ -26,7 +26,6 @@ export class UserProfileComponent implements OnInit {
       console.log(result);
       if (result.status === 200) {
         //success event. User has been removed from system.
-        this.userService.setUserNotes(null);
         this.userService.setUser(null);
         this.authService.doLogout();
         // redirect the user to the home page.

@@ -23,9 +23,7 @@ export class UserDashboardComponent implements OnInit {
       (data: Data) => {
         this.user = data["user"].user;
         this.notes = this.user.notes;
-        this.userService.setUserNotes(this.user.notes);
         this.userService.setUser(this.user);
-        // console.dir(`User data received : ${this.user}. Notes = ${this.notes}`);
       },
       err => {
         console.log(`Error occurred : ${err}`);

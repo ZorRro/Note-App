@@ -10,9 +10,9 @@ import { Observable } from "rxjs";
 })
 export class UserService {
   private _user: User = null;
-  private apiUserUri = environment.baseDomain + "serverUser/";
-  private _deleteUserUri = environment.baseDomain + "serverUser/delete";
-  private _updateUserUri = environment.baseDomain + "serverUser/update";
+  private _apiUserUri = environment.baseDomain + "serverUser/";
+  private _deleteUserUri = this._apiUserUri + "delete";
+  private _updateUserUri = this._apiUserUri + "update";
 
   private userNotes: Note[];
   constructor(private http: HttpClient) {}
@@ -26,15 +26,11 @@ export class UserService {
   }
 
   retrieveUserData(userId) {
-    return this.http.get<User>(this.apiUserUri + userId);
-  }
-
-  setUserNotes(notes: Note[]) {
-    this.userNotes = notes;
+    return this.http.get<User>(this._apiUserUri + userId);
   }
 
   getNoteDetails(id: string) {
-    return this.userNotes.find(userNote => userNote["_id"] == id);
+    return this._user.notes.find(userNote => userNote["_id"] == id);
   }
 
   updateUser(user: User): Observable<User> {
@@ -45,5 +41,13 @@ export class UserService {
     // this request will be intercepted and the userID
     // details will be added by the interceptor.
     return this.http.get(this._deleteUserUri, { observe: "response" });
+  }
+
+  updateUserNote(savedNote: Note) {
+    const currentNote = this._user.notes.find(
+      (note: Note) => note["_id"] === savedNote["_id"]
+    );
+    this._user.notes.splice(this._user.notes.indexOf(currentNote), 1);
+    this._user.notes.push(savedNote);
   }
 }

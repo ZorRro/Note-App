@@ -7,11 +7,11 @@ import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.com
 import { AuthGuard } from "guards/auth.guard";
 import { UserGuard, UserChildGuard } from "guards/user.guard";
 import { UserDataResolverService } from "./service/user-data-resolver.service";
-import { NoteViewComponent } from "./user/note-view/note-view.component";
+import { NoteViewComponent } from "./note/note-view/note-view.component";
 import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
-import { NoteEditComponent } from "./user/note-edit/note-edit.component";
+import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
