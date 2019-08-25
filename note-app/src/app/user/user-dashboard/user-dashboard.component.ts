@@ -13,6 +13,7 @@ export class UserDashboardComponent implements OnInit {
   user: User = null;
   notes: Note[];
   message: string;
+  filterValue: string;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService
@@ -30,5 +31,10 @@ export class UserDashboardComponent implements OnInit {
         this.message = err;
       }
     );
+  }
+
+  filterNotes(value) {
+    console.log(value);
+    this.filterValue = value;
   }
 }

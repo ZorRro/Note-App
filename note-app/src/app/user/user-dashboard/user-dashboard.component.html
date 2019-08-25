@@ -2,18 +2,30 @@
   <div class="row mx-auto" style="max-width: 85%">
     <div class="d-none d-md-inline col-md-3 mr-3">
       <div class="form-group">
-        <label for="note_filter">Filter Notes</label>
+        <label for="noteFilter">Filter Notes</label>
         <input
           type="text"
-          name="note_filter"
-          id="note_filter"
+          name="noteFilter"
+          id="noteFilter"
           class="form-control"
+          placeholder="Title"
+          #titleFilterValue
+        />
+
+        <input
+          type="button"
+          (click)="filterNotes(titleFilterValue.value)"
+          class="btn btn-primary font-merriweather"
+          value="Filter"
         />
       </div>
     </div>
     <div class="col col-md-8">
       <ul class="row list-unstyled">
-        <li *ngFor="let note of notes" class="col col-md-6">
+        <li
+          *ngFor="let note of notes | titleFilter: filterValue"
+          class="col col-md-6"
+        >
           <app-note [note]="note"></app-note>
         </li>
 

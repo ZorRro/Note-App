@@ -60,6 +60,16 @@ UserRouter.get("/delete", (req, res) => {
       }
       console.log(`user removed. ${result}`);
       res.status(200).json({ message: "User is removed from the system." });
+      const userNoteIds = result.notes;
+      Note.deleteMany({ _id: { $in: userNoteIds } })
+        .then(noteDeletionResult => {
+          if (noteDeletionResult) {
+            console.log("Notes were deleted");
+          } else {
+            console.log("Unable to delete user notes.");
+          }
+        })
+        .catch(err => console.error);
     })
     .catch(err => {
       console.error(`error occurred while removing user. ${err}`);

@@ -28,6 +28,7 @@ import { KeepHtmlPipe } from "./pipes/keep-html.pipe";
 import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
 import { NavComponent } from "./nav/nav.component";
+import { TitleFilterPipe } from './src/app/pipes/title-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { NavComponent } from "./nav/nav.component";
     KeepHtmlPipe,
     NoteEditComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    TitleFilterPipe
   ],
   imports: [
     BrowserModule,
