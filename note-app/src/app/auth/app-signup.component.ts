@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm, FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "../service/auth.service";
+import { AuthService } from "../services/auth.service";
 import { BlackListValidatorFactory } from "../validators/blacklist.validator";
 import { PasswordValidator } from "../validators/password.validator";
 
@@ -63,10 +63,8 @@ export class AppSignupComponent implements OnInit {
       response => {
         console.log(response);
         if (response.status === 200) {
-          this.message = "Signup successfull. Please login";
-          setTimeout(() => {
-            this.router.navigate(["auth/login"]);
-          }, 2000);
+          this.message = `Signup successfull.
+          Please activate your account by clicking on a link sent in a mail to your registered email.`;
         }
       },
       error => {

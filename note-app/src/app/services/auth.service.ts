@@ -9,6 +9,7 @@ import { environment } from "src/environments/environment";
 export class AuthService {
   private loginUri = environment.baseDomain + "serverAuth/login";
   private singupUri = environment.baseDomain + "serverAuth/signup";
+  private activateUri = environment.baseDomain + "serverAuth/activate";
   private isLoggedIn = false;
   private _user: User = null;
   @Output() updateEvent: EventEmitter<User> = new EventEmitter();
@@ -61,5 +62,11 @@ export class AuthService {
       this._user = null;
     }
     this.updateEvent.emit(this._user);
+  }
+
+  doActivate(identity: string, info: string) {
+    return this.httpClient.get(
+      `${this.activateUri}?identity=${identity}&info=${info}`
+    );
   }
 }

@@ -46,6 +46,25 @@
 <section id="login">
   <div class="container-fluid row">
     <div class="col col-md-6 col-lg-4 mx-auto">
+      <div
+        *ngIf="message"
+        class="alert alert-info alert-dismissible fade show"
+        role="alert"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span style="font-size: 14px;">{{ message }}</span>
+      </div>
+
+      <script>
+        $(".alert").alert();
+      </script>
       <form class="formGroup" [formGroup]="signupForm" (ngSubmit)="onSignup()">
         <div class="form-group">
           <label for="name">Name</label>

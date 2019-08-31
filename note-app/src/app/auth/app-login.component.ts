@@ -1,16 +1,28 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { AuthService } from "../service/auth.service";
+import { AuthService } from "../services/auth.service";
 import { User } from "../model/user.model";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-login",
   templateUrl: "./app-login.component.html"
 })
-export class AppLoginComponent {
+export class AppLoginComponent implements OnInit {
   loginMessage: string;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(param => {
+      if (param.get("message")) {
+        this.loginMessage = param.get("message");
+      }
+    });
+  }
 
   onLoginSubmit(loginForm: NgForm) {
     if (!this.validate(loginForm.value)) {

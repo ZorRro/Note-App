@@ -2,6 +2,7 @@ const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const authUtil = require("../util/auth.util");
+const mailer = require("../util/mailer.util");
 const secret = process.env.SECRET;
 
 function validateSignupUserData(userData) {
@@ -69,8 +70,15 @@ module.exports.signupController = (req, res) => {
           user
             .save()
             .then(dbResult => {
-              console.log(dbResult);
-              res.status(200).json(dbResult);
+              console.log("User created.");
+              const resource = {
+                email: dbResult.email
+              };
+              res.status(200).json(resource);
+              const token = jwt.sign(dbResult.id, secret);
+              mailer.createInstance();
+              mailer.buildEmail("user@gmail.com", dbResult.id, token);
+              mailer.send();
             })
             .catch(err => {
               console.error(err);
@@ -86,5 +94,13 @@ module.exports.signupController = (req, res) => {
   } else {
     console.log("Invalid User Data.");
     res.status(400);
+  }
+};
+
+module.exports.activationController = (req, res) => {
+  if (req.body.activated) {
+    return res.status(200).json({ activated: req.body.activated });
+  } else {
+    return res.status(401).json({ activated: req.body.activated });
   }
 };

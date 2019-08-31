@@ -6,13 +6,14 @@ import { AppComponent } from "./app.component";
 import { UserDashboardComponent } from "./user/user-dashboard/user-dashboard.component";
 import { AuthGuard } from "guards/auth.guard";
 import { UserGuard, UserChildGuard } from "guards/user.guard";
-import { UserDataResolverService } from "./service/user-data-resolver.service";
+import { UserDataResolverService } from "./services/user-data-resolver.service";
 import { NoteViewComponent } from "./note/note-view/note-view.component";
 import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-edit.component";
 import { NewNoteComponent } from "./note/new-note/new-note.component";
 import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
+import { ActivateComponent } from "./src/app/auth/activate/activate.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: "signup",
         component: AppSignupComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: "activate",
+        component: ActivateComponent
       },
       {
         path: "**",

@@ -6,9 +6,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
-import { AuthService } from "./service/auth.service";
-import { UserDataResolverService } from "./service/user-data-resolver.service";
-import { TokenInterceptorService } from "./service/token-interceptor.service";
+import { AuthService } from "./services/auth.service";
+import { UserDataResolverService } from "./services/user-data-resolver.service";
+import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 // import { QuillModule } from "ngx-quill";
 import { CKEditorModule } from "ckeditor4-angular";
@@ -28,7 +28,8 @@ import { KeepHtmlPipe } from "./pipes/keep-html.pipe";
 import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
 import { NavComponent } from "./nav/nav.component";
-import { TitleFilterPipe } from './src/app/pipes/title-filter.pipe';
+import { TitleFilterPipe } from "./src/app/pipes/title-filter.pipe";
+import { ActivateComponent } from './src/app/auth/activate/activate.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { TitleFilterPipe } from './src/app/pipes/title-filter.pipe';
     NoteEditComponent,
     HomeComponent,
     NavComponent,
-    TitleFilterPipe
+    TitleFilterPipe,
+    ActivateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { AuthService } from "../service/auth.service";
+import { AuthService } from "../services/auth.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { FeedbackService } from "../services/feedback.service";

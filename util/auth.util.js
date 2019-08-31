@@ -57,3 +57,16 @@ module.exports.verifyToken = function(req, res, next) {
   req.body.userId = payload;
   next();
 };
+
+module.exports.validateTokenAndId = function(req, res, next) {
+  const userId = req.query.identity;
+  const token = req.query.info;
+
+  const payload = jwt.verify(token, secret);
+  if (payload === userId) {
+    req.body.activated = true;
+  } else {
+    req.body.activated = false;
+  }
+  next();
+};
