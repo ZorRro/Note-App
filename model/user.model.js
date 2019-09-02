@@ -23,7 +23,11 @@ const User = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "note"
     }
-  ]
+  ],
+  activated: {
+    type: Boolean,
+    default: false
+  }
 });
 
 User.methods.addNote = function(noteId) {

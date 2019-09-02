@@ -8,4 +8,5 @@ export interface User {
   email: string;
   notes: Note[];
   token: string;
+  activated: boolean;
 }
