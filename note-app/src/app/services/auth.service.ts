@@ -10,6 +10,8 @@ export class AuthService {
   private loginUri = environment.baseDomain + "serverAuth/login";
   private singupUri = environment.baseDomain + "serverAuth/signup";
   private activateUri = environment.baseDomain + "serverAuth/activate";
+  private resetPasswordUri =
+    environment.baseDomain + "serverAuth/reset-password";
   private isLoggedIn = false;
   private _user: User = null;
   @Output() updateEvent: EventEmitter<User> = new EventEmitter();
@@ -68,5 +70,19 @@ export class AuthService {
     return this.httpClient.get(
       `${this.activateUri}?identity=${identity}&info=${info}`
     );
+  }
+
+  doInitiateResetPassword(regEmail: string) {
+    return this.httpClient.post(
+      this.resetPasswordUri + "?action=initiate",
+      regEmail
+    );
+  }
+
+  doResetPassword(token: string, password: string) {
+    return this.httpClient.post(this.resetPasswordUri + "?action=reset", {
+      password: password,
+      token: token
+    });
   }
 }

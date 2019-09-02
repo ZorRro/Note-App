@@ -1,10 +1,12 @@
 <section id="login">
   <div class="container">
     <div class="row justify-content-center align-items-center">
+      <!-- Login form -->
       <form
         class="col-md-5 mt-5"
         #loginForm="ngForm"
         (ngSubmit)="onLoginSubmit(loginForm)"
+        *ngIf="!(forgotPass || resetPass)"
       >
         <div
           *ngIf="loginMessage"
@@ -56,6 +58,12 @@
           </div>
         </div>
 
+        <div class="mb-2 mt-0">
+          <a style="cursor: pointer; color: #2575DC" (click)="forgotPassword()"
+            >Forgot password</a
+          >
+        </div>
+
         <div class="form-group">
           <button
             type="submit"
@@ -65,6 +73,137 @@
             Login
           </button>
           <button type="reset" class="btm btn-warning mr-2">Reset</button>
+        </div>
+      </form>
+
+      <!-- Forgot password form -->
+      <form
+        class="col-md-5 mt-5"
+        #forgottenPasswordForm="ngForm"
+        (ngSubmit)="forgottenPasswordFormSubmit(forgottenPasswordForm)"
+        *ngIf="forgotPass"
+      >
+        <div
+          *ngIf="loginMessage"
+          class="alert alert-info alert-dismissible fade show"
+          role="alert"
+        >
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{{ loginMessage }}</strong>
+        </div>
+        <div class="form-group">
+          <label for="username">Registered email</label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            ngModel
+            #regEmail="ngModel"
+            name="regEmail"
+            id="regEmail"
+            placeholder="John Doe"
+            [class.is-invalid]="regEmail.invalid && regEmail.touched"
+          />
+          <div [class.d-none]="!regEmail.touched || regEmail.valid">
+            <small class="text-danger">*Email is required.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btm btn-primary mr-2"
+            [disabled]="forgottenPasswordForm.invalid"
+          >
+            Submit
+          </button>
+          <button
+            type="reset"
+            class="btm btn-warning mr-2"
+            (click)="forgotPassword()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <!-- Forgot reset form -->
+      <form
+        class="col-md-5 mt-5"
+        #resetPasswordForm="ngForm"
+        (ngSubmit)="resetPasswordFormSubmit(resetPasswordForm)"
+        *ngIf="resetPass"
+      >
+        <div
+          *ngIf="loginMessage"
+          class="alert alert-info alert-dismissible fade show"
+          role="alert"
+        >
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{{ loginMessage }}</strong>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            required
+            type="password"
+            class="form-control"
+            ngModel
+            #password="ngModel"
+            name="password"
+            id="password"
+            [class.is-invalid]="password.invalid && password.touched"
+          />
+          <div [class.d-none]="!password.touched || password.valid">
+            <small class="text-danger">*Password is required.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            required
+            type="password"
+            class="form-control"
+            ngModel
+            #confirmPassword="ngModel"
+            name="confirmPassword"
+            id="confirmPassword"
+            [class.is-invalid]="
+              confirmPassword.invalid && confirmPassword.touched
+            "
+          />
+          <div
+            [class.d-none]="!confirmPassword.touched || confirmPassword.valid"
+          >
+            <small class="text-danger">*Confirm Password is required.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btm btn-primary mr-2"
+            [disabled]="resetPasswordForm.invalid"
+          >
+            Submit
+          </button>
+          <button type="reset" class="btm btn-warning mr-2">
+            Reset
+          </button>
         </div>
       </form>
     </div>

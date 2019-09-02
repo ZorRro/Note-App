@@ -14,4 +14,12 @@ AuthRouter.get(
   authController.activationController
 );
 
+// This requires a query parameter
+// action=[reset | initiate]
+AuthRouter.post(
+  "/reset-password",
+  authUtil.verifyResetPasswordRequest,
+  authController.resetPasswordController
+);
+
 module.exports = AuthRouter;
