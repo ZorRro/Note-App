@@ -114,7 +114,7 @@ module.exports.resetPasswordController = async (req, res) => {
   if (email) {
     try {
       const user = await User.findOne({ email: email });
-      if (!(user || user.id)) {
+      if (!(user && user.id)) {
         return res.status(404).json({ message: "email is not registered." });
       } else {
         res.sendStatus(200);

@@ -75,14 +75,16 @@ export class AuthService {
   doInitiateResetPassword(regEmail: string) {
     return this.httpClient.post(
       this.resetPasswordUri + "?action=initiate",
-      regEmail
+      regEmail,
+      { responseType: "text", observe: "response" }
     );
   }
 
   doResetPassword(token: string, password: string) {
-    return this.httpClient.post(this.resetPasswordUri + "?action=reset", {
-      password: password,
-      token: token
-    });
+    return this.httpClient.post(
+      this.resetPasswordUri + "?action=reset",
+      { password: password, token: token },
+      { responseType: "text", observe: "response" }
+    );
   }
 }

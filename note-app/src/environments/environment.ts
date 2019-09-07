@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseDomain: 'http://localhost:30090/'
+  baseDomain: "http://localhost:30090/",
+  enableTracing: true
 };
 
 /*

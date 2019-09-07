@@ -9,16 +9,13 @@
     </small>
   </div>
   <div class="card-body">
-    <div class="card-text lead" [innerHTML]="note.content | keepHtml">
-      <small>
-        <span
-          class="text-secondary font-italic float-right"
-          [innerHTML]="'Modified: ' + (note.lastModified | date)"
-        ></span
-      ></small>
-    </div>
+    <div class="card-text lead" [innerHTML]="note.content | keepHtml"></div>
   </div>
   <div class="card card-footer">
+    <div class="text-secondary font-italic small text-right">
+      Modified: {{ note.lastModified | date }}
+    </div>
+
     <div class="btn-group">
       <button class="btn-md btn-warning mr-2 rounded-sm" (click)="editNote()">
         Edit

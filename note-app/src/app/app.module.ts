@@ -6,7 +6,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
-import { AuthService } from "./services/auth.service";
 import { UserDataResolverService } from "./services/user-data-resolver.service";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
@@ -28,8 +27,8 @@ import { KeepHtmlPipe } from "./pipes/keep-html.pipe";
 import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
 import { NavComponent } from "./nav/nav.component";
-import { TitleFilterPipe } from "./src/app/pipes/title-filter.pipe";
-import { ActivateComponent } from './src/app/auth/activate/activate.component';
+import { TitleFilterPipe } from "./pipes/title-filter.pipe";
+import { ActivateComponent } from "./auth/activate/activate.component";
 @NgModule({
   declarations: [
     AppComponent,

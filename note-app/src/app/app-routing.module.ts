@@ -13,7 +13,8 @@ import { UserProfileEditComponent } from "./user/user-profile-edit/user-profile-
 import { NewNoteComponent } from "./note/new-note/new-note.component";
 import { NoteEditComponent } from "./note/note-edit/note-edit.component";
 import { HomeComponent } from "./home/home.component";
-import { ActivateComponent } from "./src/app/auth/activate/activate.component";
+import { ActivateComponent } from "./auth/activate/activate.component";
+import { environment } from "src/environments/environment";
 
 const routes: Routes = [
   {
@@ -88,7 +89,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [
+    RouterModule.forRoot(routes, { enableTracing: environment.enableTracing })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

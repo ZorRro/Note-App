@@ -188,6 +188,7 @@ UserRouter.post("/notes/update", (req, res) => {
   Note.findById(reqNote.id)
     .then(note => {
       note.content = reqNote.content;
+      note.lastModified = Date.now();
       return note;
     })
     .then(updatedNote => {
